@@ -1,4 +1,4 @@
-package take.me.home;
+package cultural.finder;
 
 import android.content.Context;
 import android.location.Location;
