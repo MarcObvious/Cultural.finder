@@ -2,12 +2,35 @@
 <resources>
 
     <string name="app_name">Cultural.finder</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1">Search</string>
+    <string name="title_section2">Guide me now!</string>
+    <string name="title_section3">Map</string>
+    <string name="title_section4">Settings</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
+    <string name="action_example">Go!</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Search fragment -->
+    <string name="Question">Where do you want to go?</string>
+    <string name="Question_hint">Type a Location or Postal Code</string>
+    <string name="Button_search">Search!</string>
+    <string name="Button_go_home">Just take me home!!</string>
+    <string name="DestLat">Destination Latitude</string>
+    <string name="DestLong">Destination Longitude</string>
+
+    <!-- Settings fragment -->
+    <string name="Question2">I\'m at home!</string>
+    <string name="Button_home">Set home</string>
+    <string name="HomeLat">Home Latitude</string>
+    <string name="HomeLong">Home Longitude</string>
+    <string name="Button_fake_home">Fake home</string>
+    
+     <!-- Settings guide -->
+    <string name="ActLat">Actual Latitude</string>
+    <string name="ActLong">Actual Longitude</string>
+    <string name="X">X</string>
+    <string name="Y">Y</string>
+    <string name="Z">Z</string>
 
 </resources>
