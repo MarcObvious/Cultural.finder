@@ -1,6 +1,9 @@
 package letsbecool.culturalfinder;
 
+import android.net.Uri;
+
 import java.util.Date;
+import java.util.Vector;
 
 public class Event {
     private String name;
@@ -13,6 +16,8 @@ public class Event {
     private Double latitude;
     private String district;
 
+    private Vector<Uri> phothos = null; //Demana a crits que es millori
+
     public Event(String name, String description, Date date_start, Date date_end, String district, Double latitude, Double longitude) {
         this.name = name;
         this.description = description;
@@ -23,14 +28,20 @@ public class Event {
         this.longitude = longitude;
     }
 
-
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setPhotos(Vector<Uri> phothos) {
+        this.phothos = phothos;
+    }
+
+    public Vector<Uri> getPhotos () {
+        return phothos;
     }
 
     public String getDescription() {
