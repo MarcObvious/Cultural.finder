@@ -1,6 +1,9 @@
 package letsbecool.culturalfinderandroidapp;
 
+import android.media.Image;
+
 import java.util.Date;
+import java.util.IdentityHashMap;
 
 public class Event {
     private String name;
@@ -8,6 +11,17 @@ public class Event {
 
     private Date date_start;
     private Date date_end;
+
+
+    public Image getPortada() {
+        return portada;
+    }
+
+    public void setPortada(Image portada) {
+        this.portada = portada;
+    }
+
+    private Image portada;
 
     private Double longitude; //Potser millor agafar classe Location
     private Double latitude;
