@@ -2,11 +2,9 @@ package letsbecool.culturalfinderandroidapp;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.app.FragmentManager;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
-import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -100,6 +98,7 @@ public class MainGrid extends ActionBarActivity
 
 
         }
+        if (fragment != null)
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
