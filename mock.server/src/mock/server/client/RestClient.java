@@ -15,7 +15,6 @@ import mock.server.data.Event;
 /* Client per a comprobar la recepció d'events desde el servidor,
  * Això es el que s'haurà d'implementar a l'aplicació
  */
-
 public class RestClient {
 	public static void main(String[] args) {
 		// Items
@@ -32,7 +31,7 @@ public class RestClient {
 		//String item = targetGetall.request(MediaType.APPLICATION_JSON_TYPE).get(new GenericType<String>(){} );
 		List<Event> events = targetGetall.request(MediaType.APPLICATION_JSON_TYPE).get(  new GenericType<List<Event>>(){} );
 		for (Event item : events) 
-			System.out.println(events);
+			System.out.println(item);
 		
 		//WebTarget targetGetone = client.target("http://localhost:15000/").path("Events/get/389");
 		//Event event = targetGetone.request(MediaType.APPLICATION_JSON_TYPE).get(  new GenericType<Event>(){} );

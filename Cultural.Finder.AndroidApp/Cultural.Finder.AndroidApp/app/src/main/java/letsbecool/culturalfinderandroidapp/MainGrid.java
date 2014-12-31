@@ -1,6 +1,7 @@
 package letsbecool.culturalfinderandroidapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -16,7 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainGrid extends ActionBarActivity
@@ -35,6 +38,8 @@ public class MainGrid extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main_grid);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -45,30 +50,44 @@ public class MainGrid extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1 ))
-                .commit();
+        Fragment fragment = null;
         switch (position) {
+            case 0:
+                mTitle = getString(R.string.title_section1);
+                Toast.makeText(getApplicationContext(), R.string.title_section1, Toast.LENGTH_SHORT).show();
+
+                break;
             case 1:
-                setContentView(R.layout.activity_login);
+                mTitle = getString(R.string.title_section2);
+                Toast.makeText(getApplicationContext(), R.string.title_section2, Toast.LENGTH_SHORT).show();
+
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
+                mTitle = getString(R.string.title_section3);
+                Toast.makeText(getApplicationContext(), R.string.title_section3, Toast.LENGTH_SHORT).show();
+
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+                mTitle = getString(R.string.title_section4);
+                Toast.makeText(getApplicationContext(), R.string.title_section4, Toast.LENGTH_SHORT).show();
                 break;
             case 4:
-                mTitle = getString(R.string.title_section4);
+                mTitle = getString(R.string.title_section5);
+                Toast.makeText(getApplicationContext(), R.string.title_section5, Toast.LENGTH_SHORT).show();
                 break;
+            default:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                        .commit();
         }
-
 
 
     }
@@ -86,6 +105,9 @@ public class MainGrid extends ActionBarActivity
                 break;
             case 4:
                 mTitle = getString(R.string.title_section4);
+                break;
+            case 5:
+                mTitle = getString(R.string.title_section5);
                 break;
         }
     }
@@ -136,6 +158,9 @@ public class MainGrid extends ActionBarActivity
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
+        public PlaceholderFragment() {
+        }
+
         /**
          * Returns a new instance of this fragment for the given section
          * number.
@@ -146,9 +171,6 @@ public class MainGrid extends ActionBarActivity
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
             return fragment;
-        }
-
-        public PlaceholderFragment() {
         }
 
         @Override
