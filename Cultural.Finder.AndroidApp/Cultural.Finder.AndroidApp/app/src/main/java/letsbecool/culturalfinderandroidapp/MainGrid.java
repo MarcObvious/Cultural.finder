@@ -2,10 +2,11 @@ package letsbecool.culturalfinderandroidapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.app.DialogFragment;
+import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,6 +30,9 @@ public class MainGrid extends ActionBarActivity
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
+    private HotFragment mHotFragment;
+    private GoingFragment mGoingFragment;
+    private SincronitzaFragment mSincronitzaFragment;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -57,7 +61,7 @@ public class MainGrid extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
+
         Fragment fragment = null;
         switch (position) {
             case 0:
@@ -68,6 +72,8 @@ public class MainGrid extends ActionBarActivity
             case 1:
                 mTitle = getString(R.string.title_section2);
                 Toast.makeText(getApplicationContext(), R.string.title_section2, Toast.LENGTH_SHORT).show();
+                if (mHotFragment == null) mHotFragment = new HotFragment();
+                fragment =  mHotFragment;
 
                 break;
             case 2:
@@ -82,12 +88,21 @@ public class MainGrid extends ActionBarActivity
             case 4:
                 mTitle = getString(R.string.title_section5);
                 Toast.makeText(getApplicationContext(), R.string.title_section5, Toast.LENGTH_SHORT).show();
+
+                if (mSincronitzaFragment == null) mSincronitzaFragment = new SincronitzaFragment();
+                fragment = mSincronitzaFragment;
+
                 break;
             default:
-                fragmentManager.beginTransaction()
+                getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                         .commit();
+
+
         }
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
 
 
     }
