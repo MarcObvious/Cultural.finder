@@ -23,27 +23,13 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class SincronitzaFragment extends Fragment implements View.OnClickListener {
     private final static String LOG_TAG = "Sincronitza";
-/*   @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.sincronitza);
-
-        final Button loadButton = (Button) findViewById(R.id.button1);
-        loadButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Sincronitza.this,
-                        NetworkingAndroidHttpClientJSONActivity.class));
-            }
-        });
-    }*/
 
     private ViewGroup mSincronitzaView;
 
@@ -99,7 +85,7 @@ public class SincronitzaFragment extends Fragment implements View.OnClickListene
         protected void onPostExecute(String result) {
             if (null != mClient)
                 mClient.close();
-            Toast.makeText(getActivity(), LOG_TAG +" Funciona! " + result, Toast.LENGTH_LONG).show();
+            if (result != null) Log.i(LOG_TAG, "Sembla ser que alguna cosa surt? -> " + result);
             /*SetListAdapter(new String(
                     NetworkingAndroidHttpClientJSONActivity.this,
                     R.layout.list_item, result));*/
@@ -114,15 +100,45 @@ public class SincronitzaFragment extends Fragment implements View.OnClickListene
                 throws ClientProtocolException, IOException {
             //List<Event> result = new ArrayList<Event>();
 
-           /* String JSONResponse = new BasicResponseHandler()
-                    .handleResponse(response);*/
+            String JSONResponse = new BasicResponseHandler()
+                    .handleResponse(response);
           //  String a = (String) JSONResponse.getBytes().toString();
-         //   Log.i(LOG_TAG, "1 " + JSONResponse.getBytes());
+
+            String jsonString = null;
+            try {
+                jsonString = new String(JSONResponse.getBytes(), "UTF-8");
+            }
+            catch (UnsupportedEncodingException e) {
+                Log.i(LOG_TAG, "NOPE");
+            }
+         /*//   Log.i(LOG_TAG, "1 " + JSONResponse.getBytes());
             Log.i(LOG_TAG, "Status line " + response.getStatusLine());
             Log.i(LOG_TAG, "3 " + response.getEntity().getContent().toString());
             Log.i(LOG_TAG, "4 " + response.getAllHeaders());
-            String result = response.getEntity().toString();
-            return result;
+            String result = response.getEntity().toString();*/
+
+            return jsonString;
         }
+
+
+        /*public Object convertToUseForm(Object key, byte[] bytes) {
+            String jsonString = null;
+            try {
+                jsonString = new String(bytes, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                //#debug
+                L.e("Unable to instantiate a UTF-8 string from bytes.", "", e);
+            }
+
+            JSONObject response = null;
+            try {
+                response = new JSONObject(jsonString);
+            } catch (JSONException e) {
+                //#debug
+                L.e("Unable to instantiate a JSONObject from response.", "", e);
+            }
+
+            return response;
+        }*/
     }
 }

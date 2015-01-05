@@ -60,7 +60,7 @@ public class Services {
 		System.out.println("S'ha demanat un string");
 		Date date=new Date();    
 		System.out.println(new SimpleDateFormat("yyyy.MM.dd  HH:mm").format(date));
-		return "sembla ser que funciona";
+		return "Aquest string a sigut passat per Json";
 	}
 
 	
