@@ -19,9 +19,10 @@ import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 public class NetworkingAndroidHttpClientJSONActivity extends ListActivity {
-
+    private final static String LOG_TAG = "NetworkingAndroidHttpClientJSONActivity";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +33,7 @@ public class NetworkingAndroidHttpClientJSONActivity extends ListActivity {
 
         private static final String USER_NAME = ""; //NO HO FEM SERVIR DE MOMENT
 
-        private static final String URL = "http://192.168.1.33:15000/Events/getEvents";
+        private static final String URL = "http://192.168.1.33:15000/Events/getString";
                // + USER_NAME;
 
         AndroidHttpClient mClient = AndroidHttpClient.newInstance("");
@@ -63,47 +64,46 @@ public class NetworkingAndroidHttpClientJSONActivity extends ListActivity {
 
     private class JSONResponseHandler implements ResponseHandler<List<Event>> {
 
-        private static final String LONGITUDE_TAG = "lng";
-        private static final String LATITUDE_TAG = "lat";
-        private static final String MAGNITUDE_TAG = "magnitude";
-        private static final String EARTHQUAKE_TAG = "earthquakes";
 
         @Override
         public List<Event> handleResponse(HttpResponse response)
                 throws ClientProtocolException, IOException {
             List<Event> result = new ArrayList<Event>();
-            String JSONResponse = new BasicResponseHandler()
+          /*  String JSONResponse = new BasicResponseHandler()
                     .handleResponse(response);
-            /*try {
-               /* result = (JSONObject) JSONResponse.getBytes();
 
-                List<Event> events = targetGetall.request(MediaType.APPLICATION_JSON_TYPE).get(  new GenericType<List<Event>>(){} );
+            Toast.makeText(getApplicationContext(), "aha", Toast.LENGTH_SHORT).show();
+
+            try {
+               // result = (ArrayList<Event>())JSONResponse.getBytes();
+
+               // List<Event> events = targetGetall.request(MediaType.APPLICATION_JSON_TYPE).get(  new GenericType<List<Event>>(){} );
 
                // Get top-level JSON Object - a Map
                 JSONObject responseObject = (JSONObject) new JSONTokener(
                         JSONResponse).nextValue();
 
-                JSONArray tots = responseObject.get();
+                JSONArray tots = responseObject.getJSONArray("/getEvents");
 
                 // Extract value of "earthquakes" key -- a List
                 JSONArray earthquakes = responseObject
-                        .getJSONArray(EARTHQUAKE_TAG);*/
-/*
+                        .getJSONArray(EARTHQUAKE_TAG);
+
                 // Iterate over earthquakes list
-                for (int idx = 0; idx < earthquakes.length(); idx++) {
+               *//* for (int idx = 0; idx < earthquakes.length(); idx++) {
 
                     // Get single earthquake data - a Map
                     JSONObject earthquake = (JSONObject) earthquakes.get(idx);
 
                     // Summarize earthquake data as a string and add it to
                     // result
-                    result.add(MAGNITUDE_TAG + ":"
+                    *//**//*result.add(MAGNITUDE_TAG + ":"
                             + earthquake.get(MAGNITUDE_TAG) + ","
                             + LATITUDE_TAG + ":"
                             + earthquake.getString(LATITUDE_TAG) + ","
                             + LONGITUDE_TAG + ":"
-                            + earthquake.get(LONGITUDE_TAG));
-                }
+                            + earthquake.get(LONGITUDE_TAG));*//**//*
+                }*//*
             } catch (JSONException e) {
                 e.printStackTrace();
             }*/

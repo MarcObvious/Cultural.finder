@@ -27,6 +27,7 @@ public class MainGrid extends ActionBarActivity
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
+    private final static String LOG_TAG = "MAIN GRID";
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private HotFragment mHotFragment;
     private GoingFragment mGoingFragment;

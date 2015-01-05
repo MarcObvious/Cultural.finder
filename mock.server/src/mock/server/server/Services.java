@@ -47,6 +47,16 @@ public class Services {
 	public List<Event> getALL() {
 		return events;
 	}
+	
+	//Torna un string de prova 
+	@GET
+	@Path("/getString")
+
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getString() {
+		System.out.println("S'ha demanat un string");
+		return "sembla ser que funciona";
+	}
 
 	
 	//Torna un event o 404 si no s'ha trobat.

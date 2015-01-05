@@ -6,15 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 public class SincronitzaFragment extends Fragment implements View.OnClickListener {
-
+    private final static String LOG_TAG = "Sincronitza";
 /*   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +54,11 @@ public class SincronitzaFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View view) {
         // TODO Auto-generated method stub
-       /* startActivity(new Intent(SincronitzaFragment.this,
-                NetworkingAndroidHttpClientJSONActivity.class));*/
+        Toast.makeText(getActivity().getApplicationContext(), LOG_TAG+"S'ha començat l'activitat", Toast.LENGTH_LONG).show();
+        Log.i(LOG_TAG, " S'ha començat l'activitat");
+        startActivity(new Intent(getActivity(),
+                NetworkingAndroidHttpClientJSONActivity.class));
+
 
        /* switch (view.getId()) {
             case R.id.Button_home:
