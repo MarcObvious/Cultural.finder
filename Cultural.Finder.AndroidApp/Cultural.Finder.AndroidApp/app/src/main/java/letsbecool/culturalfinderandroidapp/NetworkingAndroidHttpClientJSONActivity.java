@@ -14,18 +14,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-public class NetworkingAndroidHttpClientJSONActivity extends ListActivity {
+public class NetworkingAndroidHttpClientJSONActivity extends Activity {
     private final static String LOG_TAG = "NetworkingAndroidHttpClientJSONActivity";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(LOG_TAG, "Sembla ser que tot va be");
         new HttpGetTask().execute();
     }
 
@@ -52,13 +55,13 @@ public class NetworkingAndroidHttpClientJSONActivity extends ListActivity {
             return null;
         }
 
-       // @Override
+      //  @Override
         protected void onPostExecute(List<String> result) {
             if (null != mClient)
                 mClient.close();
-            setListAdapter(new ArrayAdapter<String>(
+            /*setListAdapter(new ArrayAdapter<String>(
                     NetworkingAndroidHttpClientJSONActivity.this,
-                    R.layout.list_item, result));
+                    R.layout.list_item, result));*/
         }
     }
 
@@ -107,7 +110,7 @@ public class NetworkingAndroidHttpClientJSONActivity extends ListActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }*/
-            return result;
+            return null;
         }
     }
 }

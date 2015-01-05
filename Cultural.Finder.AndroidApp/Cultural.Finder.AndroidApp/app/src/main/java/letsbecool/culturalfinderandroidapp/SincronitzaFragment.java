@@ -3,6 +3,8 @@ package letsbecool.culturalfinderandroidapp;
 import android.app.Activity;
 
 import android.content.Intent;
+import android.net.http.AndroidHttpClient;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -13,6 +15,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.BasicResponseHandler;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SincronitzaFragment extends Fragment implements View.OnClickListener {
@@ -41,7 +53,6 @@ public class SincronitzaFragment extends Fragment implements View.OnClickListene
 
     }
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mSincronitzaView = (ViewGroup)inflater.inflate(R.layout.sincronitza, container, false);
         Button sinc = (Button) mSincronitzaView.findViewById(R.id.button1);
@@ -54,31 +65,64 @@ public class SincronitzaFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View view) {
         // TODO Auto-generated method stub
-        Toast.makeText(getActivity().getApplicationContext(), LOG_TAG+"S'ha començat l'activitat", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), LOG_TAG+"S'ha començat l'activitat", Toast.LENGTH_LONG).show();
         Log.i(LOG_TAG, " S'ha començat l'activitat");
-        startActivity(new Intent(getActivity(),
-                NetworkingAndroidHttpClientJSONActivity.class));
+        new HttpGetTask().execute();
 
 
-       /* switch (view.getId()) {
-            case R.id.Button_home:
-                saveLocation();
-                drawLocation(dest_loc);
-                Toast.makeText(getActivity().getApplicationContext(), "GO HOME",
-                        Toast.LENGTH_LONG).show();
-                break;
-            case R.id.Button_search:
-                saveLocation();
-                drawLocation(dest_loc);
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+    }
+    private class HttpGetTask extends AsyncTask<Void, Void, String> {
 
-                Toast.makeText(getActivity().getApplicationContext(), "SEARCH",
-                        Toast.LENGTH_LONG).show();
-                break;
-            default:
-                Log.i(LOG_TAG, "Unknown: " + view.getId());
-                break;
-        }*/
+        private static final String USER_NAME = ""; //NO HO FEM SERVIR DE MOMENT
+
+        private static final String URL = "http://192.168.1.33:15000/Events/getString";
+        // + USER_NAME;
+
+        AndroidHttpClient mClient = AndroidHttpClient.newInstance("");
+
+        @Override
+        protected String doInBackground(Void... params) {
+            HttpGet request = new HttpGet(URL);
+            JSONResponseHandler responseHandler = new JSONResponseHandler();
+            Log.i(LOG_TAG, "Ara?? Abans o despres?");
+            try {
+                return mClient.execute(request, responseHandler);
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        //  @Override
+        protected void onPostExecute(String result) {
+            if (null != mClient)
+                mClient.close();
+            Toast.makeText(getActivity(), LOG_TAG +" Funciona! " + result, Toast.LENGTH_LONG).show();
+            /*SetListAdapter(new String(
+                    NetworkingAndroidHttpClientJSONActivity.this,
+                    R.layout.list_item, result));*/
+        }
+    }
+
+    private class JSONResponseHandler implements ResponseHandler<String> {
+
+
+        @Override
+        public String handleResponse(HttpResponse response)
+                throws ClientProtocolException, IOException {
+            //List<Event> result = new ArrayList<Event>();
+
+           /* String JSONResponse = new BasicResponseHandler()
+                    .handleResponse(response);*/
+          //  String a = (String) JSONResponse.getBytes().toString();
+         //   Log.i(LOG_TAG, "1 " + JSONResponse.getBytes());
+            Log.i(LOG_TAG, "Status line " + response.getStatusLine());
+            Log.i(LOG_TAG, "3 " + response.getEntity().getContent().toString());
+            Log.i(LOG_TAG, "4 " + response.getAllHeaders());
+            String result = response.getEntity().toString();
+            return result;
+        }
     }
 }

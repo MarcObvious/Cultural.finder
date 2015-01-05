@@ -1,6 +1,9 @@
 package mock.server.server;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -55,6 +58,8 @@ public class Services {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getString() {
 		System.out.println("S'ha demanat un string");
+		Date date=new Date();    
+		System.out.println(new SimpleDateFormat("yyyy.MM.dd  HH:mm").format(date));
 		return "sembla ser que funciona";
 	}
 
